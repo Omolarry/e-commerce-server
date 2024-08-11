@@ -50,7 +50,7 @@ mongoose
       "Mongodb Connected Successfully"
     )
   )
-  .catch((err) => console.log("Database Not Connected !!!"));
+  .catch((err) => console.log("Database Not Connected !!!", err.message));
 
 // Middleware
 app.use(morgan("dev"));
