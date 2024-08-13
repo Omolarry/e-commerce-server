@@ -4,7 +4,7 @@
   "description": "An E-commerce website.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
