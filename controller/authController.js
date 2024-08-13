@@ -7,7 +7,7 @@ const { toTitleCase, validateEmail } = require("../config/function");
 const { encrypt } = require('../config/encryption');
 const userModel = require("../models/usersModel");
 const SendEmail = require("../config/email");
-const SendOtpEmail = require("../config/otp");
+const sendOTPEmail = require("../config/otp");
 const Fraud = require("../config/fraud");
 
 
@@ -166,7 +166,7 @@ class Auth {
         user.otp = generatedOtp;
         user.otpExpires = Date.now() + (5 * 60 * 1000); // Expires in 5 mins
         await user.save({ validateBeforeSave: false });
-        SendOtpEmail(user.email, generatedOtp);
+        sendOTPEmail(user.email, generatedOtp);
 
         // Generate token
         const token = jwt.sign(
@@ -234,7 +234,6 @@ class Auth {
       const clientURL = process.env.REACT_APP_URL;
       const resetURL = `${clientURL}/reset-password/${resetToken}`;
       const message = `Forgot your password? Follow this link to reset it: ${resetURL}\nIf you didn't forget your password, please ignore this email!`;
-      // const message = `Forgot your password? Submit a PATCH request with your new password and cPassword to: ${resetURL}\nIf you didn't forget your password, please ignore this email!`;
 
       await SendEmail({
         email: user.email,
